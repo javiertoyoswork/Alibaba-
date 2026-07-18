@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruleta de premios</title>
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/temas.css" />
+</head>
+<body>
+  <h1 class="ruleta-titulo" id="ruleta-titulo">Cargando...</h1>
+
+  <div class="ruleta-contenedor">
+    <div class="ruleta-puntero"></div>
+    <div class="ruleta-disco" id="rueda">
+      <div class="ruleta-etiquetas" id="etiquetas"></div>
+    </div>
+    <div class="ruleta-centro"></div>
+  </div>
+
+  <button class="ruleta-boton" id="girar" disabled>Girar</button>
+  <p class="ruleta-estado" id="estado-texto">Comprobando tiradas disponibles...</p>
+
+  <div class="particulas" id="particulas"></div>
+
+  <div class="modal-premio oculto" id="modal-premio">
+    <div class="modal-premio-caja">
+      <div id="modal-premio-texto"></div>
+      <button class="modal-premio-cerrar" id="modal-premio-cerrar">Cerrar</button>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

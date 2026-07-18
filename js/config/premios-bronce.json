@@ -1,0 +1,12 @@
+{
+  "nivel": "bronce",
+  "nombreVisible": "Ruleta Bronce",
+  "colorPrimario": "#C97C3C",
+  "colorSecundario": "#7A4A1F",
+  "premios": [
+    { "id": "desc10-cafe", "label": "10% dto. Café", "tipo": "descuento_pct", "valor": 10, "productoId": "cafe-especial", "productoNombre": "Café especial", "peso": 30, "color": "#C97C3C", "icono": "☕" },
+    { "id": "gratis-galleta", "label": "Galleta gratis", "tipo": "producto_gratis", "valor": null, "productoId": "galleta", "productoNombre": "Galleta artesana", "peso": 10, "color": "#8A5A2C", "icono": "🍪" },
+    { "id": "desc-fijo-2", "label": "2€ dto.", "tipo": "descuento_fijo", "valor": 2, "productoId": "cualquiera", "productoNombre": null, "peso": 20, "color": "#B5651D", "icono": "💶" },
+    { "id": "nada", "label": "Sigue participando", "tipo": "sin_premio", "valor": null, "productoId": null, "productoNombre": null, "peso": 40, "color": "#5B3A1A", "icono": "✖️" }
+  ]
+}

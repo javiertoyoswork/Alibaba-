@@ -1,0 +1,13 @@
+{
+  "nivel": "plata",
+  "nombreVisible": "Ruleta Plata",
+  "colorPrimario": "#B8C4CC",
+  "colorSecundario": "#4A6572",
+  "premios": [
+    { "id": "desc20-cafe", "label": "20% dto. Café", "tipo": "descuento_pct", "valor": 20, "productoId": "cafe-especial", "productoNombre": "Café especial", "peso": 25, "color": "#8FA6B2", "icono": "☕" },
+    { "id": "gratis-galleta", "label": "Galleta gratis", "tipo": "producto_gratis", "valor": null, "productoId": "galleta", "productoNombre": "Galleta artesana", "peso": 20, "color": "#6C88A0", "icono": "🍪" },
+    { "id": "gratis-bebida", "label": "Bebida gratis", "tipo": "producto_gratis", "valor": null, "productoId": "bebida-fria", "productoNombre": "Bebida fría", "peso": 15, "color": "#4A6572", "icono": "🥤" },
+    { "id": "desc-fijo-5", "label": "5€ dto.", "tipo": "descuento_fijo", "valor": 5, "productoId": "cualquiera", "productoNombre": null, "peso": 15, "color": "#7A93A3", "icono": "💶" },
+    { "id": "nada", "label": "Sigue participando", "tipo": "sin_premio", "valor": null, "productoId": null, "productoNombre": null, "peso": 25, "color": "#3A4D57", "icono": "✖️" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "nivel": "oro",
+  "nombreVisible": "Ruleta Oro",
+  "colorPrimario": "#FFD700",
+  "colorSecundario": "#8A6B00",
+  "premios": [
+    { "id": "desc30-cafe", "label": "30% dto. Café", "tipo": "descuento_pct", "valor": 30, "productoId": "cafe-especial", "productoNombre": "Café especial", "peso": 20, "color": "#FFD700", "icono": "☕" },
+    { "id": "gratis-galleta", "label": "Galleta gratis", "tipo": "producto_gratis", "valor": null, "productoId": "galleta", "productoNombre": "Galleta artesana", "peso": 18, "color": "#E0B800", "icono": "🍪" },
+    { "id": "gratis-bebida", "label": "Bebida gratis", "tipo": "producto_gratis", "valor": null, "productoId": "bebida-fria", "productoNombre": "Bebida fría", "peso": 15, "color": "#C29B00", "icono": "🥤" },
+    { "id": "gratis-menu", "label": "Menú gratis", "tipo": "producto_gratis", "valor": null, "productoId": "menu-completo", "productoNombre": "Menú completo", "peso": 12, "color": "#A67F00", "icono": "🍽️" },
+    { "id": "desc-fijo-10", "label": "10€ dto.", "tipo": "descuento_fijo", "valor": 10, "productoId": "cualquiera", "productoNombre": null, "peso": 20, "color": "#8A6B00", "icono": "💶" },
+    { "id": "nada", "label": "Sigue participando", "tipo": "sin_premio", "valor": null, "productoId": null, "productoNombre": null, "peso": 15, "color": "#5C4700", "icono": "✖️" }
+  ]
+}

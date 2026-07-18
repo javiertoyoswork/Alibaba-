@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruleta de premios — Panel de pruebas</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    h1 { text-align: center; font-size: 1.4rem; }
+    .niveles { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .nivel-tarjeta {
+      display: block;
+      text-decoration: none;
+      color: #1a1a1a;
+      padding: 1.5rem 2rem;
+      border-radius: 1rem;
+      font-weight: 800;
+      text-align: center;
+      min-width: 160px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.15s ease;
+    }
+    .nivel-tarjeta:hover { transform: translateY(-4px); }
+    .nivel-bronce { background: #c97c3c; }
+    .nivel-plata { background: #d8e2e8; }
+    .nivel-oro { background: #ffd700; }
+    p.nota { max-width: 480px; text-align: center; font-size: 0.85rem; opacity: 0.75; }
+    code { background: #222; padding: 0.15rem 0.4rem; border-radius: 0.3rem; }
+  </style>
+</head>
+<body>
+  <h1>Panel de pruebas — Ruleta de premios</h1>
+  <div class="niveles">
+    <a class="nivel-tarjeta nivel-bronce" href="./ruleta.html?nivel=bronce&cliente=demo&tiradas=1">🥉 Bronce</a>
+    <a class="nivel-tarjeta nivel-plata" href="./ruleta.html?nivel=plata&cliente=demo&tiradas=1">🥈 Plata</a>
+    <a class="nivel-tarjeta nivel-oro" href="./ruleta.html?nivel=oro&cliente=demo&tiradas=1">🥇 Oro</a>
+  </div>
+  <p class="nota">
+    Estos enlaces incluyen <code>&tiradas=1</code> para forzar una tirada de prueba
+    (ver <code>js/creditsProvider.js</code>). En producción, el link real que mande el
+    bot de Telegram no debe llevar ese parámetro.
+  </p>
+</body>
+</html>

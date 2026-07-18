@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #fff;
+  background: var(--fondo, #1a1a1a);
+  transition: background 0.4s ease;
+  overflow-x: hidden;
+}
+
+.ruleta-titulo {
+  margin: 0;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-primario, #fff);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ruleta-contenedor {
+  position: relative;
+  width: clamp(260px, 80vw, 380px);
+  aspect-ratio: 1 / 1;
+}
+
+.ruleta-puntero {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 1.5rem solid var(--color-puntero, #fff);
+  z-index: 3;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.ruleta-disco {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 6px solid var(--color-borde, #fff);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.35), 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: rotate(0deg);
+}
+
+.ruleta-etiquetas {
+  position: absolute;
+  inset: 0;
+}
+
+.ruleta-etiqueta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  width: 5.5rem;
+  margin-left: -2.75rem;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.ruleta-etiqueta-icono {
+  font-size: 1.3rem;
+}
+
+.ruleta-centro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--color-centro, #fff);
+  border: 4px solid var(--color-borde, #fff);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.ruleta-boton {
+  padding: 0.85rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #1a1a1a;
+  background: var(--color-primario, #fff);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.ruleta-boton:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.ruleta-boton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ruleta-estado {
+  min-height: 1.2rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  text-align: center;
+}
+
+.particulas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.particula {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color, #fff);
+  animation: particula-vuelo 900ms ease-out forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes particula-vuelo {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
+    opacity: 0;
+  }
+}
+
+.modal-premio {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 20;
+}
+
+.modal-premio.oculto {
+  display: none;
+}
+
+.modal-premio-caja {
+  background: #fff;
+  color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 320px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-icono {
+  display: block;
+  font-size: 2.5rem;
+}
+
+.modal-premio-cerrar {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}

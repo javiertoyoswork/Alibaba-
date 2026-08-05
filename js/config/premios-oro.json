@@ -1,6 +1,7 @@
 {
   "nivel": "oro",
   "nombreVisible": "Ruleta Oro",
+  "costeCreditos": 200,
   "colorPrimario": "#FFD700",
   "colorSecundario": "#8A6B00",
   "premios": [

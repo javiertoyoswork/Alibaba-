@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ruleta — Administración</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    .caja {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    h1 { margin: 0; font-size: 1.3rem; text-align: center; }
+    label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem; opacity: 0.85; }
+    input, select {
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 0.6rem;
+      background: #ffd700;
+      color: #1a1a1a;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .mensaje { min-height: 1.2rem; font-size: 0.85rem; text-align: center; }
+    .mensaje.error { color: #ff8080; }
+    .mensaje.exito { color: #7ee787; }
+    textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      padding: 0.6rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .oculto { display: none; }
+  </style>
+</head>
+<body>
+  <div class="caja" id="login-panel">
+    <h1>Panel de administrador</h1>
+    <form id="form-login">
+      <label>Usuario
+        <input id="usuario" autocomplete="username" required />
+      </label>
+      <label>Contraseña
+        <input id="contrasena" type="password" autocomplete="current-password" required />
+      </label>
+      <button type="submit">Entrar</button>
+      <p class="mensaje error" id="login-error"></p>
+    </form>
+  </div>
+
+  <div class="caja oculto" id="panel-admin">
+    <h1>Generar códigos</h1>
+    <label>Créditos por código
+      <select id="select-creditos"></select>
+    </label>
+    <label>Cantidad de códigos
+      <input id="input-cantidad" type="number" value="10" min="1" max="100" />
+    </label>
+    <button id="btn-generar">Generar y copiar</button>
+    <p class="mensaje" id="mensaje-generar"></p>
+    <textarea id="lista-codigos" rows="10" readonly placeholder="Aquí aparecerán los códigos generados"></textarea>
+  </div>
+
+  <script type="module" src="./js/admin.js"></script>
+</body>
+</html>

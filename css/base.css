@@ -129,6 +129,18 @@ body {
   text-align: center;
 }
 
+.ruleta-volver {
+  color: inherit;
+  opacity: 0.75;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.ruleta-volver:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 .particulas {
   position: fixed;
   inset: 0;

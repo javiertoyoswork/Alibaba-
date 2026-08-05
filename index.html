@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ruleta de premios — Panel de pruebas</title>
+  <title>Ruleta de premios</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -12,46 +12,108 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 1.5rem;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 3rem;
       font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      background: #111;
+      background: radial-gradient(circle at 50% 0%, #262626 0%, #111 60%);
       color: #fff;
     }
-    h1 { text-align: center; font-size: 1.4rem; }
-    .niveles { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .nivel-tarjeta {
-      display: block;
-      text-decoration: none;
-      color: #1a1a1a;
-      padding: 1.5rem 2rem;
+    h1 { margin: 0; text-align: center; font-size: 1.5rem; }
+
+    .panel-codigo {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 1rem;
-      font-weight: 800;
-      text-align: center;
-      min-width: 160px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      transition: transform 0.15s ease;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-    .nivel-tarjeta:hover { transform: translateY(-4px); }
-    .nivel-bronce { background: #c97c3c; }
-    .nivel-plata { background: #d8e2e8; }
-    .nivel-oro { background: #ffd700; }
-    p.nota { max-width: 480px; text-align: center; font-size: 0.85rem; opacity: 0.75; }
-    code { background: #222; padding: 0.15rem 0.4rem; border-radius: 0.3rem; }
+    .panel-codigo form { display: flex; gap: 0.5rem; }
+    .panel-codigo input {
+      flex: 1;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    .panel-codigo button {
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 0.6rem;
+      background: #ffd700;
+      color: #1a1a1a;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .panel-codigo button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .creditos-total {
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    .creditos-total strong { font-size: 1.4rem; color: #ffd700; }
+
+    .mensaje-codigo { min-height: 1.2rem; font-size: 0.85rem; text-align: center; }
+    .mensaje-codigo.exito { color: #7ee787; }
+    .mensaje-codigo.error { color: #ff8080; }
+
+    .tarjetas-ruleta {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .tarjeta-ruleta {
+      border-radius: 1rem;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .tarjeta-bronce { background: #c97c3c; }
+    .tarjeta-plata { background: #d8e2e8; }
+    .tarjeta-oro { background: #ffd700; }
+    .tarjeta-ruleta h3 { margin: 0; }
+    .tarjeta-boton {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 999px;
+      background: #1a1a1a;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .tarjeta-boton:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background: rgba(26, 26, 26, 0.6);
+    }
   </style>
 </head>
 <body>
-  <h1>Panel de pruebas — Ruleta de premios</h1>
-  <div class="niveles">
-    <a class="nivel-tarjeta nivel-bronce" href="./ruleta.html?nivel=bronce&cliente=demo&tiradas=1">🥉 Bronce</a>
-    <a class="nivel-tarjeta nivel-plata" href="./ruleta.html?nivel=plata&cliente=demo&tiradas=1">🥈 Plata</a>
-    <a class="nivel-tarjeta nivel-oro" href="./ruleta.html?nivel=oro&cliente=demo&tiradas=1">🥇 Oro</a>
-  </div>
-  <p class="nota">
-    Estos enlaces incluyen <code>&tiradas=1</code> para forzar una tirada de prueba
-    (ver <code>js/creditsProvider.js</code>). En producción, el link real que mande el
-    bot de Telegram no debe llevar ese parámetro.
-  </p>
+  <h1>Canjea tu código y gira la ruleta</h1>
+
+  <section class="panel-codigo">
+    <form id="form-codigo">
+      <input id="input-codigo" placeholder="Código, ej. 50-AB12-CD34" autocomplete="off" required />
+      <button type="submit">Canjear</button>
+    </form>
+    <p class="mensaje-codigo" id="mensaje-codigo"></p>
+    <p class="creditos-total">Créditos disponibles: <strong id="creditos-total">0</strong></p>
+  </section>
+
+  <div class="tarjetas-ruleta" id="tarjetas-ruleta"></div>
+
+  <script type="module" src="./js/lobby.js"></script>
 </body>
 </html>

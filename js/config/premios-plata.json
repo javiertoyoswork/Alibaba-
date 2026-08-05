@@ -1,6 +1,7 @@
 {
   "nivel": "plata",
   "nombreVisible": "Ruleta Plata",
+  "costeCreditos": 100,
   "colorPrimario": "#B8C4CC",
   "colorSecundario": "#4A6572",
   "premios": [

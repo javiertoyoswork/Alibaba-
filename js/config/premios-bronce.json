@@ -1,6 +1,7 @@
 {
   "nivel": "bronce",
   "nombreVisible": "Ruleta Bronce",
+  "costeCreditos": 50,
   "colorPrimario": "#C97C3C",
   "colorSecundario": "#7A4A1F",
   "premios": [

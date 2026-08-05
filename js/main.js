@@ -1,6 +1,7 @@
 import { elegirPremio } from './weightedRandom.js';
 import { renderWheel, calcularRotacionFinal, girarRueda } from './wheelRenderer.js';
 import { getSpinsAvailable, consumeSpin } from './creditsProvider.js';
+import { getCreditos } from './wallet.js';
 
 const NIVELES_VALIDOS = ['bronce', 'plata', 'oro'];
 const CONFIG_POR_NIVEL = {
@@ -9,11 +10,9 @@ const CONFIG_POR_NIVEL = {
   oro: { archivo: './js/config/premios-oro.json', duracionMs: 6000, vueltas: 7, particulas: 35 },
 };
 
-function leerParametros() {
+function leerNivel() {
   const params = new URLSearchParams(window.location.search);
-  const nivel = NIVELES_VALIDOS.includes(params.get('nivel')) ? params.get('nivel') : 'bronce';
-  const clientId = params.get('cliente') || 'demo';
-  return { nivel, clientId };
+  return NIVELES_VALIDOS.includes(params.get('nivel')) ? params.get('nivel') : 'bronce';
 }
 
 async function cargarConfig(nivel) {
@@ -37,22 +36,24 @@ function lanzarParticulas(contenedor, cantidad, colores) {
   }
 }
 
-async function actualizarEstadoBoton({ boton, estadoTexto, clientId, nivel }) {
-  const estado = await getSpinsAvailable(clientId, nivel);
+async function actualizarEstadoBoton({ boton, estadoTexto, costeCreditos }) {
+  const estado = await getSpinsAvailable(costeCreditos);
   boton.disabled = !estado.disponible;
   estadoTexto.textContent = estado.disponible
-    ? '¡Tienes una tirada disponible!'
-    : `Sin tirada disponible (${estado.motivo}).`;
+    ? `Coste de esta tirada: ${costeCreditos} créditos (${estado.motivo}).`
+    : `No puedes tirar todavía: ${estado.motivo}.`;
   return estado;
 }
 
 async function init() {
-  const { nivel, clientId } = leerParametros();
+  const nivel = leerNivel();
   const config = CONFIG_POR_NIVEL[nivel];
 
   document.body.dataset.nivel = nivel;
 
-  const config_premios = await cargarConfig(nivel);
+  const configPremios = await cargarConfig(nivel);
+  const costeCreditos = configPremios.costeCreditos;
+
   const titulo = document.getElementById('ruleta-titulo');
   const rueda = document.getElementById('rueda');
   const etiquetas = document.getElementById('etiquetas');
@@ -63,30 +64,30 @@ async function init() {
   const modalCerrar = document.getElementById('modal-premio-cerrar');
   const particulasContenedor = document.getElementById('particulas');
 
-  titulo.textContent = config_premios.nombreVisible;
+  titulo.textContent = configPremios.nombreVisible;
 
-  const segmentos = renderWheel(rueda, etiquetas, config_premios.premios);
+  const segmentos = renderWheel(rueda, etiquetas, configPremios.premios);
 
-  await actualizarEstadoBoton({ boton, estadoTexto, clientId, nivel });
+  await actualizarEstadoBoton({ boton, estadoTexto, costeCreditos });
 
   boton.addEventListener('click', async () => {
     boton.disabled = true;
 
-    const premioGanador = elegirPremio(config_premios.premios);
+    const premioGanador = elegirPremio(configPremios.premios);
     const gradosFinal = calcularRotacionFinal(segmentos, premioGanador, config.vueltas);
 
     await girarRueda(rueda, gradosFinal, config.duracionMs);
 
     if (premioGanador.tipo !== 'sin_premio') {
-      const colores = config_premios.premios.map((p) => p.color);
+      const colores = configPremios.premios.map((p) => p.color);
       lanzarParticulas(particulasContenedor, config.particulas, colores);
     }
 
     modalTexto.innerHTML = `<span class="modal-icono">${premioGanador.icono}</span><strong>${premioGanador.label}</strong>`;
     modal.classList.remove('oculto');
 
-    await consumeSpin(clientId, nivel, premioGanador);
-    await actualizarEstadoBoton({ boton, estadoTexto, clientId, nivel });
+    consumeSpin(costeCreditos);
+    await actualizarEstadoBoton({ boton, estadoTexto, costeCreditos });
   });
 
   modalCerrar.addEventListener('click', () => {
